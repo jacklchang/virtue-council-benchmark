@@ -118,7 +118,3 @@ model versions change - a new evaluation run is logged as a new entry.
 ## Citation
 
 (forthcoming -- arXiv preprint)
-
-## License
-
-MIT
