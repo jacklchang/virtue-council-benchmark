@@ -41,10 +41,10 @@ inspect eval courage_eval.py --model openai/gpt-4o
 ```
 Run across all target models:
 ```
-inspect eval courage_eval.py --model openai/gpt-4o
-inspect eval courage_eval.py --model anthropic/claude-opus-4-20250514
-inspect eval courage_eval.py --model google/gemini-1.5-pro
-inspect eval courage_eval.py --model meta-llama/Llama-3-70b-instruct
+inspect eval courage_eval.py --model openai/gpt-5.5
+inspect eval courage_eval.py --model anthropic/claude-sonnet-4-6
+inspect eval courage_eval.py --model google/gemini-2.5-flash
+inspect eval courage_eval.py --model meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
 ```
 View results in Inspect's web UI:
 ```
