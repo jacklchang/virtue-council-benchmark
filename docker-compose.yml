@@ -1,0 +1,10 @@
+services:
+  courage-eval:
+    build: .
+    env_file: .env
+    volumes:
+      - ./datasets:/app/datasets
+      - ./scripts:/app/scripts
+      - ./results:/app/results
+      - ~/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json:ro
+    command: ["python", "scripts/courage_eval.py"]
