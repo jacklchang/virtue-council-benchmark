@@ -8,3 +8,21 @@ services:
       - ./results:/app/results
       - ~/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json:ro
     command: ["python", "scripts/courage_eval.py"]
+
+  prepare-dilemmas:
+    build: .
+    env_file: .env
+    volumes:
+      - ./datasets:/app/datasets
+      - ./scripts:/app/scripts
+      - ./results:/app/results
+    command: ["python", "scripts/prepare_dilemmas.py"]
+
+  deliberation-eval:
+    build: .
+    env_file: .env
+    volumes:
+      - ./datasets:/app/datasets
+      - ./scripts:/app/scripts
+      - ./results:/app/results
+    command: ["python", "scripts/deliberation_eval.py"]

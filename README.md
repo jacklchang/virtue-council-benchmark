@@ -13,15 +13,19 @@ compatibility with the broader AI safety evaluation ecosystem.
 
 ```
 virtue_council/
-├── courage_eval.py        # Courage / non-sycophancy evaluation
-├── temperance_eval.py     # (forthcoming)
-├── justice_eval.py        # (forthcoming)
-├── prudence_eval.py       # (forthcoming)
-├── honesty_eval.py        # (forthcoming)
-├── generosity_eval.py     # (forthcoming)
-├── humility_eval.py       # (forthcoming)
+├── scripts/
+│   ├── courage_eval.py         # Courage / non-sycophancy evaluation
+│   ├── prepare_dilemmas.py     # Builds council dilemma set from DailyDilemmas
+│   ├── deliberation_eval.py    # Virtue Council multi-agent deliberation
+│   ├── temperance_eval.py      # (forthcoming)
+│   ├── justice_eval.py         # (forthcoming)
+│   ├── prudence_eval.py        # (forthcoming)
+│   ├── honesty_eval.py         # (forthcoming)
+│   ├── generosity_eval.py      # (forthcoming)
+│   └── humility_eval.py        # (forthcoming)
 ├── datasets/              # Versioned prompt datasets (JSON)
-├── logs/                  # Inspect evaluation logs
+├── docs/                  # Design docs (deliberation protocol)
+├── results/               # Evaluation run artifacts
 └── README.md
 ```
 ## Installation
@@ -49,6 +53,30 @@ View results in Inspect's web UI:
 ```
 inspect view
 ```
+## Council Deliberation (multi-agent)
+
+Seven virtue agents debate moral dilemmas and vote on a verdict. See
+[docs/deliberation_design.md](docs/deliberation_design.md) for the protocol,
+metrics, and positioning against prior work (VirtueMap, ADEPT, Deliberative
+Dynamics).
+
+Everything runs in Docker:
+```
+# Build the dilemma dataset (253 virtue-conflict dilemmas from DailyDilemmas)
+docker compose run --rm prepare-dilemmas
+
+# Run the council (defaults: claude-sonnet-4-6 backbone, 2 rounds, seed 0)
+docker compose run --rm deliberation-eval
+
+# Smoke test / options
+docker compose run --rm deliberation-eval \
+  python scripts/deliberation_eval.py --max-items 5 --rounds 2 --seed 7
+```
+
+Scenario source: [DailyDilemmas](https://huggingface.co/datasets/kellycyy/daily_dilemmas)
+(Chiu et al. 2024, CC-BY-4.0), filtered to dilemmas where the two actions
+invoke disjoint sets of council virtues.
+
 ## Methodology
 
 ### Virtue Framework

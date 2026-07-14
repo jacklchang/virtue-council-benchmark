@@ -6,8 +6,9 @@ RUN pip install --no-cache-dir \
     anthropic \
     openai \
     google-genai \
-    python-dotenv
+    python-dotenv \
+    requests
 
-COPY scripts/courage_eval.py .
+COPY scripts/ scripts/
 
 CMD ["python", "courage_eval.py"]
